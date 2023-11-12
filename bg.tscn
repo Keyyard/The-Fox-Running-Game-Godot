@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://7sw5sc12xu7i"]
+
+[ext_resource type="Texture2D" uid="uid://d0brmqsdsng5p" path="res://Graphical Assets/environment/Background/back.png" id="1_hmffk"]
+[ext_resource type="Texture2D" uid="uid://bxb0pbkthwd4h" path="res://Graphical Assets/environment/Background/middle.png" id="2_rq8lm"]
+
+[sub_resource type="GDScript" id="GDScript_qe7qm"]
+resource_name = "bg"
+script/source = "extends ParallaxBackground
+
+var scrolling_speed = Vector2(100, 0)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	scroll_offset -= scrolling_speed * delta
+"
+
+[node name="bg" type="ParallaxBackground"]
+script = SubResource("GDScript_qe7qm")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+rotation = 0.0012374
+motion_mirroring = Vector2(1100, 0)
+
+[node name="bg" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(576, 323.5)
+scale = Vector2(2.98958, 2.67083)
+texture = ExtResource("1_hmffk")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+scale = Vector2(255, 255)
+motion_mirroring = Vector2(1150, 0)
+
+[node name="Middle" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(0.352943, 1.94507)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(1.02744, 1.94507)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle3" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(1.71375, 1.94116)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle4" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(2.38818, 1.94116)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle5" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(3.03143, 1.94901)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle6" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(3.70587, 1.94901)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle7" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(4.36072, 1.96075)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle8" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(5.03516, 1.96075)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle9" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(5.70593, 1.98428)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")
+
+[node name="Middle10" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(6.38037, 1.98428)
+scale = Vector2(0.00392157, 0.00392157)
+texture = ExtResource("2_rq8lm")

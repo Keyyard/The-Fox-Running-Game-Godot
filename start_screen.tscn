@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxll0x0cj0nn6"]
+
+[ext_resource type="PackedScene" uid="uid://7sw5sc12xu7i" path="res://bg.tscn" id="1_xx6nk"]
+
+[sub_resource type="GDScript" id="GDScript_skrr6"]
+resource_name = "PLAY"
+script/source = "extends Button
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://world.tscn\")
+"
+
+[node name="start screen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TITLE" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 65.0
+offset_right = 387.0
+offset_bottom = 91.0
+scale = Vector2(3, 3)
+auto_translate = false
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "THE FOX RUNNING GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PLAY" type="Button" parent="."]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 317.0
+offset_right = 574.0
+offset_bottom = 348.0
+scale = Vector2(2, 2)
+action_mode = 0
+text = "PLAY"
+icon_alignment = 1
+script = SubResource("GDScript_skrr6")
+
+[node name="bg" parent="." instance=ExtResource("1_xx6nk")]
+
+[connection signal="pressed" from="PLAY" to="PLAY" method="_on_pressed"]

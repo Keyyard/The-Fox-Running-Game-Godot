@@ -1,0 +1,134 @@
+[gd_scene load_steps=17 format=3 uid="uid://b0olewn18jglq"]
+
+[ext_resource type="Texture2D" uid="uid://bs1uh3jrs0uj0" path="res://Graphical Assets/sprites/player/idle/player-idle-1.png" id="1_2d7gj"]
+[ext_resource type="Texture2D" uid="uid://ivuqbcxt0igc" path="res://Graphical Assets/sprites/player/idle/player-idle-2.png" id="2_7c58j"]
+[ext_resource type="Texture2D" uid="uid://bwvyua2eqoih0" path="res://Graphical Assets/sprites/player/idle/player-idle-3.png" id="3_j0xkw"]
+[ext_resource type="Texture2D" uid="uid://cv8ar6dvew8m8" path="res://Graphical Assets/sprites/player/idle/player-idle-4.png" id="4_3xbv0"]
+[ext_resource type="Texture2D" uid="uid://b7xjf1mjva8l4" path="res://Graphical Assets/sprites/player/jump/player-jump-1.png" id="5_bsn3b"]
+[ext_resource type="Texture2D" uid="uid://duuhyqvv8xjin" path="res://Graphical Assets/sprites/player/jump/player-jump-2.png" id="6_xf62k"]
+[ext_resource type="Texture2D" uid="uid://bu03t2fkg7nqq" path="res://Graphical Assets/sprites/player/run/player-run-1.png" id="7_0cd55"]
+[ext_resource type="Texture2D" uid="uid://w183oh1g8xr2" path="res://Graphical Assets/sprites/player/run/player-run-2.png" id="8_pbncv"]
+[ext_resource type="Texture2D" uid="uid://c4tgotrydcq" path="res://Graphical Assets/sprites/player/run/player-run-3.png" id="9_u4bhd"]
+[ext_resource type="Texture2D" uid="uid://3m156u70asmr" path="res://Graphical Assets/sprites/player/run/player-run-4.png" id="10_sni76"]
+[ext_resource type="Texture2D" uid="uid://tf146vdoimdk" path="res://Graphical Assets/sprites/player/run/player-run-5.png" id="11_owush"]
+[ext_resource type="Texture2D" uid="uid://p2ckcqjypec5" path="res://Graphical Assets/sprites/player/run/player-run-6.png" id="12_8gpw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4d16"]
+size = Vector2(1153.5, 81)
+
+[sub_resource type="GDScript" id="GDScript_o8f6h"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	# Handle Jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis(\"left\", \"right\")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78wp6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h0kpw"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2d7gj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7c58j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j0xkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3xbv0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bsn3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xf62k")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0cd55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pbncv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u4bhd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sni76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_owush")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8gpw4")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="world" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(578.25, 604.5)
+shape = SubResource("RectangleShape2D_e4d16")
+
+[node name="Panel just for the visual" type="Panel" parent="."]
+offset_left = -254.0
+offset_top = 561.0
+offset_right = -214.0
+offset_bottom = 601.0
+scale = Vector2(79.3832, 2.19924)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(46, 508)
+scale = Vector2(1.60403, 1.60403)
+script = SubResource("GDScript_o8f6h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_78wp6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_h0kpw")
+animation = &"run"
+frame_progress = 0.25327
