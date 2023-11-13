@@ -1452,4 +1452,3 @@ libraries = {
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="mob" parent="Mobs" instance=ExtResource("23_gnphe")]
-position = Vector2(43, 17)

@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://8v60ws12r4gd" path="res://Graphical Assets/environment/Props/rock-2.png" id="4_yfkgi"]
 [ext_resource type="Texture2D" uid="uid://b7xjf1mjva8l4" path="res://Graphical Assets/sprites/player/jump/player-jump-1.png" id="5_bsn3b"]
 [ext_resource type="Texture2D" uid="uid://b6h3ff73fhqhu" path="res://Graphical Assets/environment/Props/tree-house.png" id="5_d5j6u"]
+[ext_resource type="Script" path="res://platforms.gd" id="6_1gb04"]
 [ext_resource type="Texture2D" uid="uid://duuhyqvv8xjin" path="res://Graphical Assets/sprites/player/jump/player-jump-2.png" id="6_xf62k"]
 [ext_resource type="Texture2D" uid="uid://bu03t2fkg7nqq" path="res://Graphical Assets/sprites/player/run/player-run-1.png" id="7_0cd55"]
 [ext_resource type="Texture2D" uid="uid://w183oh1g8xr2" path="res://Graphical Assets/sprites/player/run/player-run-2.png" id="8_pbncv"]
@@ -1088,20 +1089,6 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_go05e")
 
-[sub_resource type="GDScript" id="GDScript_tu7j6"]
-script/source = "extends TileMap
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
 [sub_resource type="GDScript" id="GDScript_o8f6h"]
 script/source = "extends CharacterBody2D
 
@@ -1151,16 +1138,8 @@ func _physics_process(delta):
 				moving_time -= delta*1.5
 			velocity.x = 0
 			anim.play(\"Idle\")
-	if self.position.y > 680:
-		get_tree().change_scene_to_file(\"res://world.tscn\")
+
 	move_and_slide()
-	
-func disable_movement():
-	JUMP_VELOCITY = 0
-	CURRENT_SPEED = 0
-	moving_time = 0.0
-	velocity = Vector2(0, 0)
-	set_physics_process(false)
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78wp6"]
@@ -1402,7 +1381,7 @@ visibility_layer = 0
 tile_set = SubResource("TileSet_kc6ht")
 format = 2
 layer_0/tile_data = PackedInt32Array(1900617, 589824, 1, 1900618, 655360, 1, 2424895, 589824, 1, 2424896, 655360, 1)
-script = SubResource("GDScript_tu7j6")
+script = ExtResource("6_1gb04")
 
 [node name="bg" parent="." instance=ExtResource("13_y827u")]
 
@@ -1452,4 +1431,4 @@ libraries = {
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="mob" parent="Mobs" instance=ExtResource("23_gnphe")]
-position = Vector2(43, 17)
+position = Vector2(680, 420)
